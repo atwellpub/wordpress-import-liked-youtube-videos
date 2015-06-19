@@ -11,8 +11,7 @@ class YT_Liked_Videos_Activation {
 			return;
 		}	
 		
-		flush_rewrite_rules();
-		delete_option( 'youtube_liked_videos_flush_permalinks' );
+		add_action('init', array( __CLASS__ , 'flush_permalinks' ) );		
 	}
 
 	public static function activate() {
@@ -23,6 +22,11 @@ class YT_Liked_Videos_Activation {
 	
 	public static function deactivate() {
 
+	}
+	
+	public static function flush_permalinks() {
+		flush_rewrite_rules();
+		delete_option( 'youtube_liked_videos_flush_permalinks' );
 	}
 
 }
