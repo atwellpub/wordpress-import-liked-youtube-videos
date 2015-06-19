@@ -71,11 +71,11 @@ class YT_Liked_Post_Type {
 			'publicly_queryable' => true,
 			'show_ui' => true,
 			'query_var' => true,
-			'menu_icon' => '',
 			'rewrite' => array("slug" => $path),
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			'menu_position' => 34,
+			'menu_icon'  => YT_LIKED_URLPATH . 'assets/images/youtube-icon.png',
 			'show_in_nav_menus'	=> false,
 			'supports' => array()
 		);

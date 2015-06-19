@@ -138,7 +138,16 @@ class YT_Liked_Videos_Settings {
                 <tr>
                     <th><?php _e( 'Body' , 'youtube-liked-videos' ); ?></th>
                     <td>
-                        <textarea type="text" name="postbody"/><?php $settings['postbody']; ?></textarea>
+                        <textarea type="text" name="postbody"/><?php echo $settings['postbody']; ?></textarea>
+						<div class='available-tokens'>
+						{{title}} {{iframe-embed}} {{description}}  {{thumbnail-default}} {{thumbnail-medium}} {{thumbnail-high}} {{link}} {{video-id}}
+						</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><?php _e( 'Save Template' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                       <input type="submit" name="save" id="save" value="<?php _e('Save', 'youtube-liked-videos' ); ?>" class="button button-secondary">
                     </td>
                 </tr>
              </table>
@@ -183,10 +192,10 @@ class YT_Liked_Videos_Settings {
 			$settings['client_secret'] =  $_POST['client_secret'];
 		}
 		if (isset($_POST['title'])) {
-			$settings['title'] =  $_POST['title'];
+			$settings['title'] =  stripslashes($_POST['title']);
 		}
 		if (isset($_POST['postbody'])) {
-			$settings['postbody'] =  $_POST['postbody'];
+			$settings['postbody'] =  stripslashes($_POST['postbody']);
 		}
 		
 		self::update_settings($settings);
@@ -216,7 +225,7 @@ class YT_Liked_Videos_Settings {
 		
 		
         $settings['title'] = (!empty($settings['title'])) ? trim( $settings['title']) : '{{video-title}}';
-        $settings['postbody'] = (!empty($settings['postbody'])) ? trim( $settings['postbody']) : '{{video-description}}';
+        $settings['postbody'] = (!empty($settings['postbody'])) ? trim( $settings['postbody']) : '<div class="liked-video-embed">{{iframe-embed}}</div><div class="liked-video-description"><b>Uploader Comment:</b><br><blockquote>{{video-description}}</blockquote></div>';
 	
 		return $settings;
 	}
