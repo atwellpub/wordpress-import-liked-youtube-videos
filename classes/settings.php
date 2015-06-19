@@ -1,0 +1,285 @@
+<?php
+
+/**
+ * Creates Global Settings
+ *
+*/
+
+
+class YT_Liked_Videos_Settings {
+
+	static $core_settings;
+	static $active_tab;
+
+	/**
+	*	Initializes class
+	*/
+	public function __construct() {
+		self::add_hooks();
+	}
+
+	/**
+	*	Loads hooks and filters
+	*/
+	public static function add_hooks() {
+		/* save settings */
+		add_action( 'admin_init'  , array( __CLASS__ , 'save_settings' ) );
+		
+		add_action( 'admin_enqueue_scripts' , array( __CLASS__ , 'enqueue_scripts' ) );
+	
+		/* store authentication */
+		add_action( 'admin_init', array( __CLASS__ , 'store_access_tokens' ) );
+	}
+
+	/**
+	*	Load CSS & JS
+	*/
+	public static function enqueue_scripts() {
+		$screen = get_current_screen();
+
+		if ( ( isset($screen) && $screen->base != 'liked-videos_page_liked_video_settings' ) ){
+			return;
+		}
+
+		wp_enqueue_style('liked-video-settings', YT_LIKED_URLPATH . 'assets/css/admin/settings.css');
+	}
+
+	
+
+	/**
+	*	Display sidebar
+	*/
+	public static function display_sidebar() {
+		?>
+
+		<div class='sidebar'>
+			
+		</div>
+		<?php
+	}
+
+	/**
+	*	Display global settings
+	*/
+	public static function display_settings()	{
+		global $wpdb;
+
+		$settings = self::get_settings();
+		?>
+
+		<div class="clear" id="php-sql-wp-cta-version">
+		<form action='' method='POST'>
+		<input type='hidden' name='youtube_liked_videos_authorize' value='true'>
+		<?php
+		  if (empty($settings['access_token'])) {
+            ?>               
+                <h3><?php _e("Youtube Authentication", 'youtube-liked-videos'); ?></h3>
+                <div id='installation-docs'>
+                    <ol>
+                        <li><?php echo sprintf(  __( 'Go to the %sDeveloper\'s Console%s.' , 'youtube-liked-videos') , '<a href="https://console.developers.google.com/project" target="_blank">' , '</a>'); ?></li>
+                        <li><?php _e( 'Select a project, or create a new one.' , 'youtube-liked-videos' ); ?></li>
+                        <li><?php _e( 'In the sidebar on the left, expand APIs & auth. Next, click APIs. .' , 'youtube-liked-videos' ); ?></li>
+                        <li><?php _e( 'In the sidebar on the left, select Credentials.' , 'youtube-liked-videos' ); ?></li>
+                        <li><?php echo sprintf( __(  'Click create new client id , choose "Web Application" and after setting up your consent screen, set your \'Authorized redirect URIs\' to:<br> %s ' , 'youtube-liked-videos' )  , $settings['redirect_uri'] ); ?></li>
+                    </ol>
+
+
+                </div>
+                <table class="form-table">
+
+
+                <tr>
+                    <th><label for="youtube_client_id"><?php _e( 'Client ID' , 'youtube-liked-videos'); ?></label></th>
+                    <td>
+                        <input type="text" name="client_id" id="client_id" value="<?php echo $settings['client_id']; ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e("Please enter your youtube_client_id."); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="youtube_client_secret"><?php _e('Client secret' , 'youtube-liked-videos'); ?></label></th>
+                    <td>
+                        <input type="text" name="client_secret" id="client_secret" value="<?php echo $settings['client_secret']; ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e("Please enter your youtube_client_secret.", 'youtube-liked-videos'); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><?php _e( 'Authorize' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                        <input type="submit" name="authorize" id="authorize" value="<?php _e( 'Authorize' , 'youtube-liked-videos' ); ?>" class="button button-primary primary" /><br />
+
+                    </td>
+                </tr>
+                </table>
+            <?php
+            } else {
+            ?>              
+                <h3><?php _e("Youtube Authentication", 'youtube-liked-videos'); ?></h3>
+                <table class="form-table">
+                <tr>
+                    <th><?php _e( 'De-Authorize' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                        <input type="submit" name="deauthorize" id="deauthorize" value="<?php _e( 'Deauthorize' , 'youtube-liked-videos' ); ?>" class="button button-primary primary" /><br />
+
+                    </td>
+                </tr>
+                </table>
+            <?php
+            }
+            ?>
+			
+			 <h3><?php _e("Templating", 'youtube-liked-videos'); ?></h3>
+             <table class="form-table">
+                <tr>
+                    <th><?php _e( 'Title' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                        <input type="text" name="title" value="<?php echo $settings['title']; ?>" />
+                    </td>
+                </tr>
+                <tr>
+                    <th><?php _e( 'Body' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                        <textarea type="text" name="postbody"/><?php $settings['postbody']; ?></textarea>
+                    </td>
+                </tr>
+             </table>
+		</form>
+	<?php
+	}
+
+
+	/**
+	*	Renders supporting JS
+	*/
+	public static function inline_js() {
+
+		?>
+		<script type='text/javascript'>
+			jQuery(document).ready(function($) {
+
+				
+
+			});
+		</script>
+		<?php
+
+	}
+
+	/**
+	*	Listens for POST & saves settings changes
+	*/
+	public static function save_settings() {
+		
+		if ( !isset($_POST['youtube_liked_videos_authorize'])) {
+			return;
+		}
+		
+		$settings = self::get_settings();
+
+		
+		if (isset($_POST['client_id'])) {
+			$settings['client_id'] = $_POST['client_id'];
+		}
+		if (isset($_POST['client_secret'])) {
+			$settings['client_secret'] =  $_POST['client_secret'];
+		}
+		if (isset($_POST['title'])) {
+			$settings['title'] =  $_POST['title'];
+		}
+		if (isset($_POST['postbody'])) {
+			$settings['postbody'] =  $_POST['postbody'];
+		}
+		
+		self::update_settings($settings);
+
+		/* return if fields are empty */
+		if ( isset($_POST['authorize']) ) {
+			self::start_authorization();
+		}
+		 /* return if fields are empty */
+		if ( isset($_POST['deauthorize']) ) {
+			self::start_deauthorization();
+		}
+		
+	}
+
+	/**
+	*  Get Saved API Key
+	*/
+	public static function get_settings() {
+		$settings = get_option( 'youtube-liked-videos');	
+		$settings['redirect_uri'] = trim(admin_url('edit.php?post_type=liked-videos&page=liked_video_settings&yt-get-tokens=true'));
+		$settings['access_token_json'] = (!empty($settings['access_token_json'])) ? trim( $settings['access_token_json']) : '';
+        $settings['access_token'] = (!empty($settings['access_token'])) ? trim( $settings['access_token']) : '';
+        $settings['refresh'] = (!empty($settings['refresh_token'])) ? trim( $settings['refresh_token']) : '';
+        $settings['client_id'] = (!empty($settings['client_id'])) ? trim( $settings['client_id']) : '';
+        $settings['client_secret'] = (!empty($settings['client_secret'])) ? trim( $settings['client_secret']) : '';
+		
+		
+        $settings['title'] = (!empty($settings['title'])) ? trim( $settings['title']) : '{{video-title}}';
+        $settings['postbody'] = (!empty($settings['postbody'])) ? trim( $settings['postbody']) : '{{video-description}}';
+	
+		return $settings;
+	}
+	/**
+	*  Get Saved API Key
+	*/
+	public static function update_settings( $settings ) {
+		update_option( 'youtube-liked-videos' , $settings );		
+
+	}
+	
+	/**
+	 * redirect to google calendar oauth
+	 */
+	public static function start_authorization() {
+		include YT_LIKED_PATH .  'assets/libraries/google-api-php-client-master/src/Google/autoload.php';
+		$authUrl = Youtube_Liked_Videos_Connect::get_oauth_url();
+		header('Location:'.$authUrl);
+		exit;
+
+	}
+
+	/**
+	 * redirect to google calendar oauth
+	 */
+	public static function start_deauthorization() {
+
+		
+		$settings = self::get_settings();
+		$settings = $_POST['youtube-liked-videos'];
+		unset($settings['access_token_json']);
+		unset($settings['access_token']);
+		unset($settings['refresh_token']);
+		self::update_settings($settings);
+
+	}
+
+	/**
+	 * Coverts google oauth code to access token
+	 */
+	public static function store_access_tokens() {
+		if (!isset($_GET['yt-get-tokens']) ) {
+			return;
+		}
+
+
+		$response = Youtube_Liked_Videos_Connect::get_access_token( $_GET['code'] );
+		$token = json_decode( $response , true );
+
+		if (isset($token['error'])) {
+			print_r($token);exit;
+		}
+		
+		$settings = self::get_settings();
+		$settings['access_token_json'] = $response;
+		$settings['access_token'] = $token['access_token'];
+		$settings['refresh_token'] = $token['refresh_token'];
+		self::update_settings($settings);
+	}
+
+}
+
+new YT_Liked_Videos_Settings;
+
+
+
