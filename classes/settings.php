@@ -68,7 +68,7 @@ class YT_Liked_Videos_Settings {
 		?>
 
 		<div class="clear" id="php-sql-wp-cta-version">
-		<form action='' method='POST'>
+		<form action='edit.php?post_type=liked-videos&page=liked_video_settings' method='POST'>
 		<input type='hidden' name='youtube_liked_videos_authorize' value='true'>
 		<?php
 		  if (empty($settings['access_token'])) {
