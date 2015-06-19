@@ -86,7 +86,7 @@ class Youtube_Liked_Videos_Connect {
 
 		Youtube_Liked_Videos_Connect::get_client();
 
-		$service = new Google_Service_Youtube( self::$client );
+		$service = new Google_Service_YouTube( self::$client );
 		$videos = $service->videos->listVideos( 'player,snippet,id' , array('myRating'=>'like' ) );
 		return $videos['items'];
 	}
