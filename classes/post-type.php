@@ -74,6 +74,7 @@ class YT_Liked_Post_Type {
 			'rewrite' => array("slug" => $path),
 			'capability_type' => 'post',
 			'hierarchical' => false,
+			'has_archive' => true,
 			'menu_position' => 34,
 			'menu_icon'  => YT_LIKED_URLPATH . 'assets/images/youtube-icon.png',
 			'show_in_nav_menus'	=> false,
