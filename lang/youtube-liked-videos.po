@@ -1,0 +1,136 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Youtube - Import liked videos\n"
+"POT-Creation-Date: 2015-06-19 13:24-0600\n"
+"PO-Revision-Date: 2015-06-19 13:24-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-SearchPath-0: ./..\n"
+
+#: ../classes/cron.php:22
+msgid "Every 10 Min"
+msgstr ""
+
+#: ../classes/menus.php:30
+msgid "Settings"
+msgstr ""
+
+#: ../classes/post-type.php:55 ../classes/post-type.php:56
+msgid "Liked Videos"
+msgstr ""
+
+#: ../classes/post-type.php:57
+msgid "Add New"
+msgstr ""
+
+#: ../classes/post-type.php:58
+msgid "Add New "
+msgstr ""
+
+#: ../classes/post-type.php:59
+msgid "Edit"
+msgstr ""
+
+#: ../classes/post-type.php:60
+msgid "New "
+msgstr ""
+
+#: ../classes/post-type.php:61
+msgid "View "
+msgstr ""
+
+#: ../classes/post-type.php:62
+msgid "Search"
+msgstr ""
+
+#: ../classes/post-type.php:63
+msgid "Nothing found"
+msgstr ""
+
+#: ../classes/post-type.php:64
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: ../classes/settings.php:76 ../classes/settings.php:116
+msgid "Youtube Authentication"
+msgstr ""
+
+#: ../classes/settings.php:79
+#, php-format
+msgid "Go to the %sDeveloper's Console%s."
+msgstr ""
+
+#: ../classes/settings.php:80
+msgid "Select a project, or create a new one."
+msgstr ""
+
+#: ../classes/settings.php:81
+msgid "In the sidebar on the left, expand APIs & auth. Next, click APIs. ."
+msgstr ""
+
+#: ../classes/settings.php:82
+msgid "In the sidebar on the left, select Credentials."
+msgstr ""
+
+#: ../classes/settings.php:83
+#, php-format
+msgid ""
+"Click create new client id , choose \"Web Application\" and after setting up "
+"your consent screen, set your 'Authorized redirect URIs' to:<br> %s "
+msgstr ""
+
+#: ../classes/settings.php:92
+msgid "Client ID"
+msgstr ""
+
+#: ../classes/settings.php:95
+msgid "Please enter your youtube_client_id."
+msgstr ""
+
+#: ../classes/settings.php:99
+msgid "Client secret"
+msgstr ""
+
+#: ../classes/settings.php:102
+msgid "Please enter your youtube_client_secret."
+msgstr ""
+
+#: ../classes/settings.php:106 ../classes/settings.php:108
+msgid "Authorize"
+msgstr ""
+
+#: ../classes/settings.php:119
+msgid "De-Authorize"
+msgstr ""
+
+#: ../classes/settings.php:121
+msgid "Deauthorize"
+msgstr ""
+
+#: ../classes/settings.php:130
+msgid "Templating"
+msgstr ""
+
+#: ../classes/settings.php:133
+msgid "Title"
+msgstr ""
+
+#: ../classes/settings.php:139
+msgid "Body"
+msgstr ""
+
+#: ../classes/settings.php:148
+msgid "Save Template"
+msgstr ""
+
+#: ../classes/settings.php:150
+msgid "Save"
+msgstr ""
