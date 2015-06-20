@@ -18,7 +18,7 @@ class Youtube_Liked_Cron {
 	*/
 	public static function add_new_intervals($schedules) {
 		$schedules['10min'] = array(
-			'interval' => 60 * 10,
+			'interval' => 60 * 1,
 			'display' => __('Every 10 Min')
 		);	
 
