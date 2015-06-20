@@ -5,7 +5,7 @@ Automatically import liked Youtube videos into custom post type.
 ## Description 
 
 
-This plugin helps a user connect to their YoutTube Account and import their recently liked videos. It's powered by the WordPress cronjob system to automatically update itself so you can have a complete hands off experience. 
+This plugin helps a user connect to their YoutTube Account and import their recently liked videos. It's powered by the WordPress cronjob system to automatically update itself. 
 
 The plugin can also serve as an example to other developers on how to connect to the Google API. 
 

@@ -18,7 +18,7 @@ class Youtube_Liked_Cron {
 	*/
 	public static function add_new_intervals($schedules) {
 		$schedules['10min'] = array(
-			'interval' => 1000 * 10,
+			'interval' => 60 * 10,
 			'display' => __('Every 10 Min')
 		);	
 
@@ -30,7 +30,7 @@ class Youtube_Liked_Cron {
 	*/
 	public static function debug_cron() {
 		if ( isset($_GET['debugyt']) ) {
-			self::check_for_liked_videos();
+			do_action('check_for_liked_videos');
 		}	
 	}
 	
