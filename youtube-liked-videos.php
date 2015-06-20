@@ -63,7 +63,6 @@ if ( !class_exists( 'YouTube_Liked_Video_Importer' )) {
 			include 'classes/settings.php'; /* required on frontend too for cron */
 			
 			if (is_admin()) {
-				include 'classes/settings.php';
 				include 'classes/activation.php';
 				include 'classes/menus.php';
 			}
