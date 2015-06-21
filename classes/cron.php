@@ -70,6 +70,7 @@ class Youtube_Liked_Cron {
 			$title = self::replace_tokens(self::$settings['title'] , $data );
 			
 			/* create post */
+			kses_remove_filters(); // remove filter
 			$post_id = wp_insert_post(
 				array(
 					'comment_status'	=>	'closed',
@@ -77,9 +78,11 @@ class Youtube_Liked_Cron {
 					'post_title'		=>	$title,
 					'post_content'		=>	$postbody,
 					'post_status'		=>	'publish',
-					'post_type'		=>	'liked-videos'
+					'post_type'		=>	'liked-videos',
+					'filter' => true
 				)
 			);
+			kses_init_filters(); 
 
 			self::$history[] = $video_id;
 		}
