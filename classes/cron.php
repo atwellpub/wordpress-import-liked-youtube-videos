@@ -60,6 +60,11 @@ class Youtube_Liked_Cron {
 				continue;
 			}
 			
+			if (!isset($data['player']['embedHtml'])) {
+				errorLog('YTLV: No embed iframe?');
+				exit;
+			}
+			
 			/* prepare post body and title */
 			$postbody = self::replace_tokens(self::$settings['postbody'] , $data );
 			$title = self::replace_tokens(self::$settings['title'] , $data );
@@ -78,7 +83,7 @@ class Youtube_Liked_Cron {
 
 			self::$history[] = $video_id;
 		}
-		
+
 		self::update_history();
 	}
 	
@@ -86,6 +91,7 @@ class Youtube_Liked_Cron {
 	*  replace tokens with content
 	*/
 	public static function replace_tokens( $string , $data ) {
+		
 		$string = str_replace( '{{video-title}}' , $data['snippet']['title'], $string );
 		$string = str_replace( '{{video-id}}' , $data['id'], $string );
 		$string = str_replace( '{{video-description}}' , $data['snippet']['description'], $string );
@@ -93,7 +99,7 @@ class Youtube_Liked_Cron {
 		$string = str_replace( '{{thumbnail-medium}}' , $data['snippet']['thumbnails']['medium']['url'], $string );
 		$string = str_replace( '{{thumbnail-high}}' , $data['snippet']['thumbnails']['high']['url'], $string );
 		$string = str_replace( '{{iframe-embed}}' , $data['player']['embedHtml'], $string );
-		
+
 		return $string;
 	}
 	
@@ -118,3 +124,4 @@ class Youtube_Liked_Cron {
 }
 
 new Youtube_Liked_Cron;
+		
