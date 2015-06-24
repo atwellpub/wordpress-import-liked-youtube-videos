@@ -62,7 +62,7 @@ class Youtube_Liked_Cron {
 			
 			if (!isset($data['player']['embedHtml'])) {
 				errorLog('YTLV: No embed iframe?');
-				exit;
+				continue;
 			}
 			
 			/* prepare post body and title */
