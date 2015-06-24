@@ -3,7 +3,7 @@
 Plugin Name: YouTube Liked Video Importer 
 Plugin URI: http://www.hudsonatwell.co/
 Description: Made to be used on personal blogging sites, this plugin imports & publishes YouTube videos that a user likes. 
-Version: 1.0.3
+Version: 1.0.5
 Author: Hudson Atwell
 Author URI: http://www.hudsonatwell.co/
 Text Domain: youtube-liked-videos
