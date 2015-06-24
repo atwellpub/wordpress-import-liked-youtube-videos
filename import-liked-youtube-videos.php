@@ -1,9 +1,9 @@
 <?php
-/*              
+/*               
 Plugin Name: YouTube Liked Video Importer 
 Plugin URI: http://www.hudsonatwell.co/
 Description: Made to be used on personal blogging sites, this plugin imports & publishes YouTube videos that a user likes. 
-Version: 1.0.5
+Version: 1.0.6
 Author: Hudson Atwell
 Author URI: http://www.hudsonatwell.co/
 Text Domain: youtube-liked-videos
@@ -45,7 +45,7 @@ if ( !class_exists( 'YouTube_Liked_Video_Importer' )) {
 		*  Defines constants
 		*/
 		public static function define_constants() {
-			define('YT_LIKED_CURRENT_VERSION', '1.0.2' );
+			define('YT_LIKED_CURRENT_VERSION', '1.0.6' );
 			define('YT_LIKED_SLUG' , plugin_basename( dirname(__FILE__) ) );
 			define('YT_LIKED_FILE' ,  __FILE__ );
 			define('YT_LIKED_URLPATH', plugins_url( ' ', __FILE__ ) );

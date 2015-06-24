@@ -7,7 +7,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: youtube, liked videos, youtube api 3.0, import, automated, cron
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 
 Automatically import liked Youtube videos into custom post type
 
