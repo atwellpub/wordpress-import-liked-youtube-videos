@@ -1,5 +1,5 @@
 <?php
-/*               
+/*                
 Plugin Name: YouTube Liked Video Importer 
 Plugin URI: http://www.hudsonatwell.co/
 Description: Made to be used on personal blogging sites, this plugin imports & publishes YouTube videos that a user likes. 
