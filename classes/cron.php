@@ -60,15 +60,16 @@ class Youtube_Liked_Cron {
 				continue;
 			}
 			
-			if (!isset($data['player']['embedHtml'])) {
-				errorLog('YTLV: No embed iframe?');
+			
+			if (!isset($data['player']['embedHtml']) || empty($data['player']['embedHtml'])) {
+				errorLog('YTLV: Embedding disabled for video '.$video_id);
 				continue;
 			}
 			
 			/* prepare post body and title */
 			$postbody = self::replace_tokens(self::$settings['postbody'] , $data );
 			$title = self::replace_tokens(self::$settings['title'] , $data );
-			
+
 			/* create post */
 			kses_remove_filters(); // remove filter
 			$post_id = wp_insert_post(

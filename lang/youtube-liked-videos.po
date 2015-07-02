@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Youtube - Import liked videos\n"
-"POT-Creation-Date: 2015-06-19 13:24-0600\n"
-"PO-Revision-Date: 2015-06-19 13:24-0600\n"
+"POT-Creation-Date: 2015-07-02 13:40-0600\n"
+"PO-Revision-Date: 2015-07-02 13:40-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -59,78 +59,94 @@ msgstr ""
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: ../classes/settings.php:76 ../classes/settings.php:116
+#: ../classes/settings.php:78 ../classes/settings.php:118
 msgid "Youtube Authentication"
 msgstr ""
 
-#: ../classes/settings.php:79
+#: ../classes/settings.php:81
 #, php-format
 msgid "Go to the %sDeveloper's Console%s."
 msgstr ""
 
-#: ../classes/settings.php:80
+#: ../classes/settings.php:82
 msgid "Select a project, or create a new one."
 msgstr ""
 
-#: ../classes/settings.php:81
+#: ../classes/settings.php:83
 msgid "In the sidebar on the left, expand APIs & auth. Next, click APIs. ."
 msgstr ""
 
-#: ../classes/settings.php:82
+#: ../classes/settings.php:84
 msgid "In the sidebar on the left, select Credentials."
 msgstr ""
 
-#: ../classes/settings.php:83
+#: ../classes/settings.php:85
 #, php-format
 msgid ""
 "Click create new client id , choose \"Web Application\" and after setting up "
 "your consent screen, set your 'Authorized redirect URIs' to:<br> %s "
 msgstr ""
 
-#: ../classes/settings.php:92
+#: ../classes/settings.php:94
 msgid "Client ID"
 msgstr ""
 
-#: ../classes/settings.php:95
+#: ../classes/settings.php:97
 msgid "Please enter your youtube_client_id."
 msgstr ""
 
-#: ../classes/settings.php:99
+#: ../classes/settings.php:101
 msgid "Client secret"
 msgstr ""
 
-#: ../classes/settings.php:102
+#: ../classes/settings.php:104
 msgid "Please enter your youtube_client_secret."
 msgstr ""
 
-#: ../classes/settings.php:106 ../classes/settings.php:108
+#: ../classes/settings.php:108 ../classes/settings.php:110
 msgid "Authorize"
 msgstr ""
 
-#: ../classes/settings.php:119
+#: ../classes/settings.php:121
 msgid "De-Authorize"
 msgstr ""
 
-#: ../classes/settings.php:121
+#: ../classes/settings.php:123
 msgid "Deauthorize"
 msgstr ""
 
-#: ../classes/settings.php:130
+#: ../classes/settings.php:132
 msgid "Templating"
 msgstr ""
 
-#: ../classes/settings.php:133
+#: ../classes/settings.php:135
 msgid "Title"
 msgstr ""
 
-#: ../classes/settings.php:139
+#: ../classes/settings.php:141
 msgid "Body"
 msgstr ""
 
-#: ../classes/settings.php:148
+#: ../classes/settings.php:150
 msgid "Save Template"
 msgstr ""
 
-#: ../classes/settings.php:150
+#: ../classes/settings.php:152
 msgid "Save"
+msgstr ""
+
+#: ../classes/settings.php:156
+msgid "History"
+msgstr ""
+
+#: ../classes/settings.php:159
+msgid "Record"
+msgstr ""
+
+#: ../classes/settings.php:165
+msgid "Modify"
+msgstr ""
+
+#: ../classes/settings.php:167
+msgid "Modify History"
 msgstr ""

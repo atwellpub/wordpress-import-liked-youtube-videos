@@ -65,6 +65,8 @@ class YT_Liked_Videos_Settings {
 		global $wpdb;
 
 		$settings = self::get_settings();
+		$history = get_option( 'yt_liked_videos' , array() );
+		$history_imploded = implode( "\r\n" , $history );
 		?>
 
 		<div class="clear" id="php-sql-wp-cta-version">
@@ -151,6 +153,21 @@ class YT_Liked_Videos_Settings {
                     </td>
                 </tr>
              </table>
+			 <h3><?php _e("History", 'youtube-liked-videos'); ?></h3>
+             <table class="form-table">
+                <tr>
+                    <th><?php _e( 'Record' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                        <textarea type="text" name="history" id='history' /><?php echo $history_imploded; ?></textarea>						
+                    </td>
+                </tr>
+                <tr>
+                    <th><?php _e( 'Modify' , 'youtube-liked-videos' ); ?></th>
+                    <td>
+                       <input type="submit" name="modify_history" id="modify_history" value="<?php _e('Modify History', 'youtube-liked-videos' ); ?>" class="button button-secondary">
+                    </td>
+                </tr>
+             </table>
 		</form>
 	<?php
 	}
@@ -209,6 +226,11 @@ class YT_Liked_Videos_Settings {
 			self::start_deauthorization();
 		}
 		
+		/* update history if user is updating history */
+		if ( $_POST['modify_history'] ) {
+			$history = explode( "\r\n" , stripslashes($_POST['history']));
+			update_option( 'yt_liked_videos', $history, false );
+		}
 	}
 
 	/**
