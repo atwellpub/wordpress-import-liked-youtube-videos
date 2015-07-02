@@ -71,7 +71,9 @@ class Youtube_Liked_Cron {
 			$title = self::replace_tokens(self::$settings['title'] , $data );
 
 			/* create post */
-			kses_remove_filters(); // remove filter
+			global $allowedposttags;
+			$allowedposttags['div'] = array('align' => array (), 'class' => array (), 'id' => array (), 'dir' => array (), 'lang' => array(), 'style' => array (), 'xml:lang' => array() );
+			$allowedposttags['iframe'] = array('src' => array () );
 			$post_id = wp_insert_post(
 				array(
 					'comment_status'	=>	'closed',
@@ -80,6 +82,7 @@ class Youtube_Liked_Cron {
 					'post_content'		=>	$postbody,
 					'post_status'		=>	'publish',
 					'post_type'		=>	'liked-videos',
+					'post_author'		=>	self::$settings['post_author'],
 					'filter' => true
 				)
 			);

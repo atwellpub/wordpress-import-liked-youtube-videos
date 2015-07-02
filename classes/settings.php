@@ -67,6 +67,8 @@ class YT_Liked_Videos_Settings {
 		$settings = self::get_settings();
 		$history = get_option( 'yt_liked_videos' , array() );
 		$history_imploded = implode( "\r\n" , $history );
+		$users = get_users( 'blog_id=1&orderby=nicename&role=administrator' );
+		
 		?>
 
 		<div class="clear" id="php-sql-wp-cta-version">
@@ -128,8 +130,22 @@ class YT_Liked_Videos_Settings {
             <?php
             }
             ?>
-			
-			 <h3><?php _e("Templating", 'youtube-liked-videos'); ?></h3>
+             <table class="form-table">
+                <tr>
+                    <th><?php _e("Publish As:", 'youtube-liked-videos'); ?></th>
+                    <td>
+						<select name='post_author' id='post_author'>
+                        <?php
+						
+						foreach ( $users as $user ) {
+							echo '<option value="'.$user->ID.'" '.( $settings['post_author'] == $user->ID ? 'selected="selected"' : '' ) .'>'.$user->data->display_name.'</option>';
+						}
+						?>
+						</select>
+                    </td>
+                </tr>
+             </table>
+			 <h3><?php _e("Templating:", 'youtube-liked-videos'); ?></h3>
              <table class="form-table">
                 <tr>
                     <th><?php _e( 'Title' , 'youtube-liked-videos' ); ?></th>
@@ -147,13 +163,13 @@ class YT_Liked_Videos_Settings {
                     </td>
                 </tr>
                 <tr>
-                    <th><?php _e( 'Save Template' , 'youtube-liked-videos' ); ?></th>
+                    <th><?php _e( 'Save Settings' , 'youtube-liked-videos' ); ?></th>
                     <td>
                        <input type="submit" name="save" id="save" value="<?php _e('Save', 'youtube-liked-videos' ); ?>" class="button button-secondary">
                     </td>
                 </tr>
              </table>
-			 <h3><?php _e("History", 'youtube-liked-videos'); ?></h3>
+			 <h3><?php _e("History:", 'youtube-liked-videos'); ?></h3>
              <table class="form-table">
                 <tr>
                     <th><?php _e( 'Record' , 'youtube-liked-videos' ); ?></th>
@@ -214,6 +230,9 @@ class YT_Liked_Videos_Settings {
 		if (isset($_POST['postbody'])) {
 			$settings['postbody'] =  stripslashes($_POST['postbody']);
 		}
+		if (isset($_POST['post_author'])) {
+			$settings['post_author'] =  stripslashes($_POST['post_author']);
+		}
 		
 		self::update_settings($settings);
 
@@ -244,6 +263,7 @@ class YT_Liked_Videos_Settings {
         $settings['refresh'] = (!empty($settings['refresh_token'])) ? trim( $settings['refresh_token']) : '';
         $settings['client_id'] = (!empty($settings['client_id'])) ? trim( $settings['client_id']) : '';
         $settings['client_secret'] = (!empty($settings['client_secret'])) ? trim( $settings['client_secret']) : '';
+        $settings['post_author'] = (!empty($settings['post_author'])) ? trim( $settings['post_author']) : '';
 		
 		
         $settings['title'] = (!empty($settings['title'])) ? trim( $settings['title']) : '{{video-title}}';

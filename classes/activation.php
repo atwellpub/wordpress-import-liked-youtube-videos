@@ -21,7 +21,7 @@ class YT_Liked_Videos_Activation {
 	}
 	
 	public static function deactivate() {
-
+		wp_clear_scheduled_hook( 'check_for_liked_videos' );
 	}
 	
 	public static function flush_permalinks() {
