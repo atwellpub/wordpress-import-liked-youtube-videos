@@ -78,7 +78,7 @@ class YT_Liked_Post_Type {
 			'menu_position' => 34,
 			'menu_icon'  => YT_LIKED_URLPATH . 'assets/images/youtube-icon.png',
 			'show_in_nav_menus'	=> false,
-			'supports' => array()
+			'supports' => array('thumbnail','title','editor')
 		);
 
 		register_post_type( 'liked-videos' , $args );
@@ -153,7 +153,7 @@ class YT_Liked_Post_Type {
 		<script type='text/javascript'>
 
 		jQuery( document ).ready( function() {
-		
+
 		});
 
 		</script>
